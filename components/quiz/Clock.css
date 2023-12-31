@@ -1,97 +1,43 @@
-/* Variables */
-:root {
-    --background: #222;
-    --inactive: #333;
-    --active: #e0eb68;
-}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
-/* Global Styles */
-html, body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    background: #f2f2f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Clock Styles */
 .clock {
-    background: var(--background);
-    width: 40vw;
-    padding: 3vw 2vw;
-    border-radius: 2vw;
+    position: absolute;
+    margin-right: 3rem;
+    top: 5rem;
+    right: 0;
+    width: 200px;
+    height: 39px;
     display: flex;
-    justify-content: center;
+    text-align: center;
     align-items: center;
-    box-shadow: 0 2vw 4vw -1vw black;
+    border-radius: 10px;
+    justify-content: center;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    background: #1A1A1A;
+    border: 3px solid #f5a51a;
 }
 
-svg {
-    width: 90%;
-    transform: skewX(-10deg);
+.time {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 25px;
+    color: #f19e0f;
 }
 
-/* Circle Styles */
-.t, .tl, .tr, .m, .b, .bl, .br {
-    fill: var(--inactive);
-}
-
-.separator {
-    fill: var(--active);
-    animation: blink 2s linear infinite;
-}
-
-/* Keyframes */
-@keyframes blink {
-    0%, 50% {
-        fill: var(--active);
-    }
-    51%, 100% {
-        fill: var(--inactive);
-    }
-}
-
-/* Time Classes */
-.time-0 .t, .time-0 .tl, .time-0 .tr, .time-0 .b, .time-0 .bl, .time-0 .br {
-    fill: var(--active);
-}
-
-.time-1 .tr, .time-1 .br {
-    fill: var(--active);
-}
-
-.time-2 .t, .time-2 .tr, .time-2 .m, .time-2 .b, .time-2 .bl {
-    fill: var(--active);
-}
-
-.time-3 .t, .time-3 .tr, .time-3 .m, .time-3 .b, .time-3 .br {
-    fill: var(--active);
-}
-
-.time-4 .tl, .time-4 .tr, .time-4 .m, .time-4 .br {
-    fill: var(--active);
-}
-
-.time-5 .t, .time-5 .tl, .time-5 .m, .time-5 .b, .time-5 .br {
-    fill: var(--active);
-}
-
-.time-6 .t, .time-6 .tl, .time-6 .m, .time-6 .b, .time-6 .bl, .time-6 .br {
-    fill: var(--active);
-}
-
-.time-7 .t, .time-7 .tr, .time-7 .br {
-    fill: var(--active);
-}
-
-.time-8 .t, .time-8 .tl, .time-8 .tr, .time-8 .m, .time-8 .b, .time-8 .bl, .time-8 .br {
-    fill: var(--active);
-}
-
-.time-9 .t, .time-9 .tl, .time-9 .tr, .time-9 .m, .time-9 .b, .time-9 .br {
-    fill: var(--active);
+.time-msg {
+    position: absolute;
+    background: crimson;
+    top: 5rem;
+    left: 50%;
+    translate: -50%;
+    font-size: 23px;
+    height: 39px;
+    width: 200px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    border: 3px solid #FFF;
+    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 }

@@ -20,8 +20,8 @@ setInitBreadcrumb([
         name: "Home"
     },
     {
-        path: "/eti",
-        name: "ETI - MCQs"
+        path: "/man",
+        name: "MAN - MCQs"
     }
 ])
 
@@ -30,7 +30,7 @@ const Page = () => {
 
     function handleCardClick(type) {
         let slug = ""
-        let path = "eti/" + type
+        let path = "man/" + type
         switch (type) {
             case "quick_test":
                 slug = "Quick MCQ Test"

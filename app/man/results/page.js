@@ -13,11 +13,11 @@ setInitBreadcrumb([
         name: "Home"
     },
     {
-        path: "/eti",
-        name: "ETI - MCQs"
+        path: "/man",
+        name: "MAN - MCQs"
     },
     {
-        path: "/eti/results",
+        path: "/man/results",
         name: "Results"
     }
 ])
@@ -68,7 +68,7 @@ const Page = () => {
                     </Card>
                     <div className="btn-x">
                         <Button color="warning" variant="bordered">
-                            <Link color="warning" href="/eti">Back To Homepage</Link>
+                            <Link color="warning" href="/man">Back To Homepage</Link>
                         </Button>
                         <Button color="warning" variant="bordered" endContent={<ChevronDownIcon/>}>
                             <Link color="warning" href="#history">Check Answers</Link>

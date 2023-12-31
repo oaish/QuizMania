@@ -1,4 +1,5 @@
 "use client";
+
 export const setInitBreadcrumb = (data) => {
     localStorage.setItem("crumbs", JSON.stringify(data))
 }
@@ -9,4 +10,10 @@ export const setBreadcrumb = (crumbs, path, name) => {
 
 export const getBreadcrumbs = () => {
     return JSON.parse(localStorage.getItem("crumbs"))
+}
+
+export default function state() {
+    return (
+        <div>State</div>
+    )
 }

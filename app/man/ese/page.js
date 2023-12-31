@@ -8,11 +8,11 @@ setInitBreadcrumb([
         name: "Home"
     },
     {
-        path: "/eti",
-        name: "ETI - MCQs"
+        path: "/man",
+        name: "MAN - MCQs"
     },
     {
-        path: "/eti/ese",
+        path: "/man/ese",
         name: "End Semester Exam"
     }
 ])
@@ -20,10 +20,11 @@ setInitBreadcrumb([
 const Page = () => {
     return (
         <Quiz
-            URL="http://localhost:3000/api/get/all-questions?table=eti_questions"
+            URL={process.env.NEXT_PUBLIC_HOST + "/api/get/all-questions?table=man_questions"}
             count={70}
             sec={5400}
-            sub="eti"
+            max={31}
+            sub="man"
             type="End Semester Exam"
             hour="1.5"
             marks="70"

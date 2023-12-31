@@ -3,25 +3,25 @@ import {
     Image,
     Card,
     CardBody,
-    CardFooter, Spacer, BreadcrumbItem, Breadcrumbs
+    CardFooter, Spacer
 } from "@nextui-org/react";
-import {useState} from "react";
-import BreadCrumbsLayout from "@/components/BreadCrumbsLayout";
+import {getBreadcrumbs, setBreadcrumb, setInitBreadcrumb} from "@/app/state";
 
-import {state} from "@/lib/state";
-import {useSnapshot} from "valtio";
+setInitBreadcrumb([
+    {
+        path: "/",
+        name: "Home"
+    }
+])
 
 export default function App() {
-    const snap = useSnapshot(state);
-
+    const crumbs = getBreadcrumbs()
     function handleCardPress(name) {
         if (name === "ETI") {
-            state.crumbs.push({
-                path: "/eti",
-                name: "ETI - MCQs"
-            })
+            setBreadcrumb(crumbs,"/eti","ETI - MCQs")
             window.location.href = "/eti";
         } else if (name === "MAN") {
+            setBreadcrumb(crumbs,"/man","MAN - MCQs")
             window.location.href = "/man";
         }
     }

@@ -1,35 +1,26 @@
 "use client"
 
-import {state} from "@/lib/state";
-import {useSnapshot} from "valtio";
-import {BreadcrumbItem, Breadcrumbs} from "@nextui-org/react";
+import {BreadcrumbItem, Breadcrumbs, Link} from "@nextui-org/react";
+import {getBreadcrumbs} from "@/app/state";
 
 const BreadCrumbsLayout = () => {
-    const snap = useSnapshot(state);
-
-    console.log("length",snap.crumbs.length);
-
+    const crumbs = getBreadcrumbs()
     return (
         <div className=" absolute top-20 mx-3">
-            {
-                snap.crumbs.length > 0 &&
-                <Breadcrumbs
-                    separator="/"
-                    itemClasses={{separator: "px-2"}}
-                    size="lg" variant="bordered"
-                >
-                    {
-                        snap.crumbs.map((crumb, index) => {
-                            console.log(crumb.path, crumb.name)
-                            return (
-                                <BreadcrumbItem key={crumb.name}>
-                                    <a href={crumb.path}>{crumb.name}</a>
-                                </BreadcrumbItem>
-                            )
-                        })
-                    }
-                </Breadcrumbs>
-            }
+            <Breadcrumbs
+                color="warning"
+                size="lg" variant="bordered"
+            >
+                {
+                    crumbs.map((crumb) => {
+                        return (
+                            <BreadcrumbItem href={crumb.path} key={crumb.name}>
+                                {crumb.name}
+                            </BreadcrumbItem>
+                        )
+                    })
+                }
+            </Breadcrumbs>
         </div>
     )
 }

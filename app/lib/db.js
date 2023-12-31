@@ -1,7 +1,7 @@
 import mysql from "mysql2/promise"
-
+require('dotenv').config()
 // create the connection to database
-const connection = await mysql.createConnection(process.env.DATABASE_URL);
+const connection = await mysql.createConnection(process.env.NEXT_DATABASE_URL);
 
 export default async function executeQuery(query, values) {
     try {

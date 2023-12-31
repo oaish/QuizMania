@@ -5,18 +5,19 @@ import Quiz from "@/components/quiz/Quiz";
 setInitBreadcrumb([{
     path: "/", name: "Home"
 }, {
-    path: "/eti", name: "ETI - MCQs"
+    path: "/man", name: "MAN - MCQs"
 }, {
-    path: "/eti/quick_test", name: "Quick MCQ Test"
+    path: "/man/quick_test", name: "Quick MCQ Test"
 }])
 
 const Page = () => {
     return (
         <Quiz
-            URL="http://localhost:3000/api/get/all-questions?table=eti_questions"
+            URL={process.env.NEXT_PUBLIC_HOST + "/api/get/all-questions?table=man_questions"}
             count={20}
             sec={3600}
-            sub="eti"
+            max={31}
+            sub="man"
             type="Quick MCQ Test"
             hour="1"
             marks="20"
