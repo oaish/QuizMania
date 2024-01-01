@@ -77,6 +77,9 @@ const Page = () => {
                         <Button color="warning" variant="bordered" onPress={() => router.push(`/eti`)}>
                             Back To Homepage
                         </Button>
+                        <Button color="warning" variant="bordered" onPress={() => router.push(`/history`)}>
+                            Results History
+                        </Button>
                         <Button color="warning" variant="bordered" onPress={() => router.push(`#history`)} endContent={<ChevronDownIcon/>}>
                             Check Answers
                         </Button>

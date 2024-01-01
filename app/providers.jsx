@@ -17,8 +17,10 @@ import {AcmeLogo} from "@/components/home/AcmeLogo";
 import {NextUIProvider} from '@nextui-org/react'
 import {useState} from "react";
 import BreadCrumbsLayout from "@/components/home/BreadCrumbsLayout";
+import {useRouter} from "next/navigation";
 
 export function Providers({children}) {
+    const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const menuItems = [
@@ -56,18 +58,21 @@ export function Providers({children}) {
                                 as="button"
                                 className="transition-transform"
                                 color="warning"
-                                name="Jason Hughes"
+                                name="Oaish Qazi"
                                 size="sm"
                                 radius="sm"
-                                src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+                                src="/AK.jpg"
+                                //https://i.pravatar.cc/150?u=a04258a2462d826712d
                             />
                         </DropdownTrigger>
                         <DropdownMenu aria-label="Profile Actions" variant="flat">
                             <DropdownItem key="profile" className="h-14 gap-2">
                                 <p className="font-semibold">Signed in as</p>
-                                <p className="font-semibold">zoey@example.com</p>
+                                <p className="font-semibold">oaishazher@gmail.com</p>
                             </DropdownItem>
-                            <DropdownItem key="settings">My Settings</DropdownItem>
+                            <DropdownItem key="history" onPress={() => router.push(`/history`)}>
+                                Results History
+                            </DropdownItem>
                             <DropdownItem key="logout" color="danger">
                                 Log Out
                             </DropdownItem>

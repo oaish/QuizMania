@@ -24,70 +24,78 @@ const Page = () => {
     }
 
     return (
-        <main className="flex justify-around w-full mt-20 p-20 text-center">
-            <Card className="py-4" isPressable onPress={() => handleCardClick("quick_test")}>
-                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <p className="text-tiny uppercase font-bold">20 Marks</p>
-                    <small className="text-default-500">1 Hour</small>
-                    <h4 className="font-bold text-large">Quick MCQ Test</h4>
-                </CardHeader>
-                <CardBody className="overflow-visible py-2">
-                    <Image
-                        alt="Card background"
-                        className="object-cover rounded-xl"
-                        src="/quick_test.jpg"
-                        width={270}
-                    />
-                </CardBody>
-            </Card>
+        <main className="flex flex-col lg:flex-row sm:gap-10 lg:justify-around w-full mt-5 lg:mt-20 p-20 text-center">
+            <div className="mb-10">
+                <Card className="py-4" isPressable onClick={() => handleCardClick("all")}>
+                    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                        <p className="text-tiny uppercase font-bold">All Questions</p>
+                        <small className="text-default-500">Limitless</small>
+                        <h4 className="font-bold text-large">Practise MCQs</h4>
+                    </CardHeader>
+                    <CardBody className="overflow-visible py-2">
+                        <Image
+                            alt="Card background"
+                            className="object-cover rounded-xl"
+                            src="/practise.jpg"
+                            width={270}
+                        />
+                    </CardBody>
+                </Card>
+            </div>
 
-            <Card className="py-4" isPressable onClick={onOpen}>
-                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <p className="text-tiny uppercase font-bold">20 Marks</p>
-                    <small className="text-default-500">1 Hour</small>
-                    <h4 className="font-bold text-large">Unit Wise Test</h4>
-                </CardHeader>
-                <CardBody className="overflow-visible py-2">
-                    <Image
-                        alt="Card background"
-                        className="object-cover rounded-xl"
-                        src="/unit_test.jpg"
-                        width={270}
-                    />
-                </CardBody>
-            </Card>
+            <div className="mb-10">
+                <Card className="py-4" isPressable onPress={() => handleCardClick("quick_test")}>
+                    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                        <p className="text-tiny uppercase font-bold">20 Marks</p>
+                        <small className="text-default-500">1 Hour</small>
+                        <h4 className="font-bold text-large">Quick MCQ Test</h4>
+                    </CardHeader>
+                    <CardBody className="overflow-visible py-2">
+                        <Image
+                            alt="Card background"
+                            className="object-cover rounded-xl"
+                            src="/quick_test.jpg"
+                            width={270}
+                        />
+                    </CardBody>
+                </Card>
+            </div>
 
-            <Card className="py-4" isPressable onClick={() => handleCardClick("ese")}>
-                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <p className="text-tiny uppercase font-bold">70 Marks</p>
-                    <small className="text-default-500">1.5 Hour</small>
-                    <h4 className="font-bold text-large">End Semester Exam</h4>
-                </CardHeader>
-                <CardBody className="overflow-visible py-2">
-                    <Image
-                        alt="Card background"
-                        className="object-cover rounded-xl"
-                        src="/ese.jpg"
-                        width={270}
-                    />
-                </CardBody>
-            </Card>
+            <div className="mb-10">
+                <Card className="py-4" isPressable onClick={onOpen}>
+                    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                        <p className="text-tiny uppercase font-bold">20 Marks</p>
+                        <small className="text-default-500">1 Hour</small>
+                        <h4 className="font-bold text-large">Unit Wise Test</h4>
+                    </CardHeader>
+                    <CardBody className="overflow-visible py-2">
+                        <Image
+                            alt="Card background"
+                            className="object-cover rounded-xl"
+                            src="/unit_test.jpg"
+                            width={270}
+                        />
+                    </CardBody>
+                </Card>
+            </div>
 
-            <Card className="py-4" isPressable onClick={() => handleCardClick("all")}>
-                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <p className="text-tiny uppercase font-bold">All Questions</p>
-                    <small className="text-default-500">Limitless</small>
-                    <h4 className="font-bold text-large">Practise MCQs</h4>
-                </CardHeader>
-                <CardBody className="overflow-visible py-2">
-                    <Image
-                        alt="Card background"
-                        className="object-cover rounded-xl"
-                        src="/practise.jpg"
-                        width={270}
-                    />
-                </CardBody>
-            </Card>
+            <div className="mb-10">
+                <Card className="py-4" isPressable onClick={() => handleCardClick("ese")}>
+                    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                        <p className="text-tiny uppercase font-bold">70 Marks</p>
+                        <small className="text-default-500">1.5 Hour</small>
+                        <h4 className="font-bold text-large lg:text-medium">End Semester Exam</h4>
+                    </CardHeader>
+                    <CardBody className="overflow-visible py-2">
+                        <Image
+                            alt="Card background"
+                            className="object-cover rounded-xl"
+                            src="/ese.jpg"
+                            width={270}
+                        />
+                    </CardBody>
+                </Card>
+            </div>
 
             <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>

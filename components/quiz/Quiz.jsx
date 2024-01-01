@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from 'react'
 import {formatTime, generateUniqueNumbers} from "@/app/lib/helper";
 import CustomSkeleton from "@/components/quiz/CustomSkeleton";
 import QuestionCard from "@/components/quiz/QuestionCard";
-import {Button, Link, Pagination} from "@nextui-org/react";
+import {Button, Link, Pagination, Skeleton} from "@nextui-org/react";
 import DigiClock from "@/components/quiz/DigiClock";
 import {useRouter} from 'next/navigation'
 import {useSnapshot} from "valtio";
@@ -132,6 +132,7 @@ const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
                     {
                         mcqs.map((mcq, index) => (
                             <QuestionCard
+                                idx={index}
                                 key={index}
                                 question={mcq.question}
                                 options={mcq.options}
@@ -141,16 +142,14 @@ const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
                         ))
                     }
                 </main>
-                <div className="overflow-hidden flex justify-center absolute bottom-10 w-full m-0 p-0">
+                <div className="flex lg:flex-row flex-col items-center lg:justify-center absolute bottom-10 w-full m-0 p-0">
                     <Pagination showShadow showControls onChange={(i) => handlePageChange(i)} size="lg"
                                 color="warning" total={count} initialPage={1}
                     />
-                    <div className="absolute right-20">
-                        <Link>
+                    <div className="lg:absolute mt-5 ml-48 lg:right-20">
                             <Button onClick={endExam} isLoading={loading} variant="bordered" color="danger">
                                 End Exam
                             </Button>
-                        </Link>
                     </div>
                 </div>
                 <DigiClock endExam={endExam} limit={seconds} setSeconds={setSeconds}/>
