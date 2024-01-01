@@ -1,5 +1,4 @@
 "use client";
-import {getBreadcrumbs, setBreadcrumb, setInitBreadcrumb} from "@/app/state";
 import {
     Button,
     Card,
@@ -12,38 +11,16 @@ import {
     ModalHeader,
     useDisclosure
 } from "@nextui-org/react";
-
-
-setInitBreadcrumb([
-    {
-        path: "/",
-        name: "Home"
-    },
-    {
-        path: "/eti",
-        name: "ETI - MCQs"
-    }
-])
+import {useRouter} from "next/navigation";
 
 const Page = () => {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
+    const router = useRouter();
+
     function handleCardClick(type) {
-        let slug = ""
         let path = "eti/" + type
-        switch (type) {
-            case "quick_test":
-                slug = "Quick MCQ Test"
-                break;
-            case "unit_test":
-                slug = "Unit Wise Test"
-                break;
-            case "ese":
-                slug = "End Semester Exam"
-                break;
-        }
-        setBreadcrumb(getBreadcrumbs(), path, slug)
-        window.location.href = path;
+        router.push(path);
     }
 
     return (
@@ -96,6 +73,22 @@ const Page = () => {
                 </CardBody>
             </Card>
 
+            <Card className="py-4" isPressable onClick={() => handleCardClick("all")}>
+                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                    <p className="text-tiny uppercase font-bold">All Questions</p>
+                    <small className="text-default-500">Limitless</small>
+                    <h4 className="font-bold text-large">Practise MCQs</h4>
+                </CardHeader>
+                <CardBody className="overflow-visible py-2">
+                    <Image
+                        alt="Card background"
+                        className="object-cover rounded-xl"
+                        src="/practise.jpg"
+                        width={270}
+                    />
+                </CardBody>
+            </Card>
+
             <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
@@ -103,14 +96,15 @@ const Page = () => {
                             <ModalHeader className="flex">Choose Unit:</ModalHeader>
                             <ModalBody className="pt-0 mx-3 mb-3">
                                 <Button color="warning" variant="bordered" onPress={() => {
-                                    localStorage.setItem("ut", "1");
-                                    handleCardClick("unit_test");
+                                    if (typeof window !== "undefined") {
+                                        localStorage.setItem("ut", "1");
+                                    }
+                                    handleCardClick("unit_test/1");
                                 }}>
                                     Unit I
                                 </Button>
                                 <Button color="warning" onPress={() => () => {
-                                    localStorage.setItem("ut", "2");
-                                    handleCardClick("unit_test");
+                                    handleCardClick("unit_test/2");
                                 }}>
                                     Unit II
                                 </Button>

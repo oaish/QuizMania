@@ -1,26 +1,10 @@
 "use client";
-import {setInitBreadcrumb} from "@/app/state";
 import {useRef} from "react";
 import {Button, Card, CardBody, CardHeader, Image, Link} from "@nextui-org/react";
 import ChevronDownIcon from "@/components/quiz/ChevronDownIcon";
 import Result from "@/components/quiz/Result";
 import "@/components/quiz/Results.css";
 import ResultQuestionCard from "@/components/quiz/ResultQuestionCard";
-
-setInitBreadcrumb([
-    {
-        path: "/",
-        name: "Home"
-    },
-    {
-        path: "/man",
-        name: "MAN - MCQs"
-    },
-    {
-        path: "/man/results",
-        name: "Results"
-    }
-])
 
 function CustomText({label, value}) {
     return (
@@ -32,8 +16,22 @@ function CustomText({label, value}) {
 
 const Page = () => {
     const containerRef = useRef(null);
-    const results = JSON.parse(localStorage.getItem("results"));
-    console.log(results.percentage, results.correct, results.length)
+    let results = {
+        marks: 0,
+        hour: 0,
+        type: "",
+        timeTaken: 0,
+        total: 0,
+        attempted: 0,
+        correct: 0,
+        percentage: 0,
+        image: "",
+        history: []
+    };
+
+    if (typeof window !== "undefined") {
+        results = JSON.parse(localStorage.getItem("results"));
+    }
 
     return (
         <>

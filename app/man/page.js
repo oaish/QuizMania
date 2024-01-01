@@ -1,5 +1,4 @@
 "use client";
-import {getBreadcrumbs, setBreadcrumb, setInitBreadcrumb} from "@/app/state";
 import {
     Button,
     Card,
@@ -12,38 +11,16 @@ import {
     ModalHeader,
     useDisclosure
 } from "@nextui-org/react";
-
-
-setInitBreadcrumb([
-    {
-        path: "/",
-        name: "Home"
-    },
-    {
-        path: "/man",
-        name: "MAN - MCQs"
-    }
-])
+import {useRouter} from "next/navigation";
 
 const Page = () => {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
+    const router = useRouter();
+
     function handleCardClick(type) {
-        let slug = ""
-        let path = "man/" + type
-        switch (type) {
-            case "quick_test":
-                slug = "Quick MCQ Test"
-                break;
-            case "unit_test":
-                slug = "Unit Wise Test"
-                break;
-            case "ese":
-                slug = "End Semester Exam"
-                break;
-        }
-        setBreadcrumb(getBreadcrumbs(), path, slug)
-        window.location.href = path;
+        let path = "eti/" + type
+        router.push(path);
     }
 
     return (
@@ -103,13 +80,17 @@ const Page = () => {
                             <ModalHeader className="flex">Choose Unit:</ModalHeader>
                             <ModalBody className="pt-0 mx-3 mb-3">
                                 <Button color="warning" variant="bordered" onPress={() => {
-                                    localStorage.setItem("ut", "1");
+                                    if (typeof window !== "undefined") {
+                                        localStorage.setItem("ut", "1");
+                                    }
                                     handleCardClick("unit_test");
                                 }}>
                                     Unit I
                                 </Button>
                                 <Button color="warning" onPress={() => () => {
-                                    localStorage.setItem("ut", "2");
+                                    if (typeof window !== "undefined") {
+                                        localStorage.setItem("ut", "2");
+                                    }
                                     handleCardClick("unit_test");
                                 }}>
                                     Unit II

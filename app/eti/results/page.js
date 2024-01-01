@@ -1,26 +1,14 @@
 "use client";
-import {setInitBreadcrumb} from "@/app/state";
-import {useRef} from "react";
+require("dotenv").config();
+import {useEffect, useRef} from "react";
 import {Button, Card, CardBody, CardHeader, Image, Link} from "@nextui-org/react";
 import ChevronDownIcon from "@/components/quiz/ChevronDownIcon";
 import Result from "@/components/quiz/Result";
 import "@/components/quiz/Results.css";
 import ResultQuestionCard from "@/components/quiz/ResultQuestionCard";
-
-setInitBreadcrumb([
-    {
-        path: "/",
-        name: "Home"
-    },
-    {
-        path: "/eti",
-        name: "ETI - MCQs"
-    },
-    {
-        path: "/eti/results",
-        name: "Results"
-    }
-])
+import {useSnapshot} from "valtio";
+import {store} from "@/app/lib/store";
+import {useRouter} from "next/navigation";
 
 function CustomText({label, value}) {
     return (
@@ -31,9 +19,28 @@ function CustomText({label, value}) {
 }
 
 const Page = () => {
+    const router = useRouter();
     const containerRef = useRef(null);
-    const results = JSON.parse(localStorage.getItem("results"));
-    console.log(results.percentage, results.correct, results.length)
+    const snap = useSnapshot(store);
+    const {results} = snap
+
+    const body = JSON.stringify({...snap.results, username: snap.username})
+
+    async function setResult() {
+        const res = await fetch(process.env.NEXT_PUBLIC_HOST + `/api/post/result`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: body
+        })
+        const data = await res.json()
+        console.log(data)
+    }
+
+    useEffect(() => {
+        setResult()
+    },[])
 
     return (
         <>
@@ -67,11 +74,11 @@ const Page = () => {
                         </CardBody>
                     </Card>
                     <div className="btn-x">
-                        <Button color="warning" variant="bordered">
-                            <Link color="warning" href="/eti">Back To Homepage</Link>
+                        <Button color="warning" variant="bordered" onPress={() => router.push(`/eti`)}>
+                            Back To Homepage
                         </Button>
-                        <Button color="warning" variant="bordered" endContent={<ChevronDownIcon/>}>
-                            <Link color="warning" href="#history">Check Answers</Link>
+                        <Button color="warning" variant="bordered" onPress={() => router.push(`#history`)} endContent={<ChevronDownIcon/>}>
+                            Check Answers
                         </Button>
                     </div>
                 </div>

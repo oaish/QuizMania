@@ -5,30 +5,18 @@ import {
     CardBody,
     CardFooter, Spacer
 } from "@nextui-org/react";
-import {getBreadcrumbs, setBreadcrumb, setInitBreadcrumb} from "@/app/state";
-
-setInitBreadcrumb([
-    {
-        path: "/",
-        name: "Home"
-    }
-])
+import {useRouter} from "next/navigation";
 
 export default function App() {
-    const crumbs = getBreadcrumbs()
-    function handleCardPress(name) {
-        if (name === "ETI") {
-            setBreadcrumb(crumbs,"/eti","ETI - MCQs")
-            window.location.href = "/eti";
-        } else if (name === "MAN") {
-            setBreadcrumb(crumbs,"/man","MAN - MCQs")
-            window.location.href = "/man";
-        }
+    const router = useRouter();
+
+    function handleCardPress(path) {
+        router.push("/" + path);
     }
     
     return (
         <main className="flex  justify-center w-full mt-20 p-20 text-center">
-            <Card shadow="sm" isPressable onPress={() => handleCardPress("ETI")}>
+            <Card shadow="sm" isPressable onPress={() => handleCardPress("eti")}>
                 <CardBody className="overflow-visible p-0">
                     <Image
                         shadow="sm"
@@ -45,7 +33,7 @@ export default function App() {
                 </CardFooter>
             </Card>
             <Spacer x="20"/>
-            <Card shadow="sm" isPressable onPress={() => handleCardPress("MAN")}>
+            <Card shadow="sm" isPressable onPress={() => handleCardPress("man")}>
                 <CardBody className="overflow-visible p-0">
                     <Image
                         shadow="sm"

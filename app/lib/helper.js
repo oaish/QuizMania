@@ -27,3 +27,53 @@ export function formatTime(seconds) {
 
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
+
+export function splitPath(path) {
+    const segments = path.split('/').filter(segment => segment !== '');
+    let currentPath = '/';
+
+    const paths = segments.map(segment => {
+        currentPath += `${segment}/`;
+        const seg = getSegmentName(segment)
+
+        return {
+            path: currentPath,
+            name: seg,
+        };
+    });
+
+    return [
+        {
+            path: "/",
+            name: "Home",
+        },
+        ...paths
+    ];
+}
+
+function getSegmentName(seg) {
+    switch (seg) {
+        case 'eti':
+            return 'ETI - MCQs';
+        case 'man':
+            return 'MAN - MCQs';
+        case 'results':
+            return 'Results';
+        case 'quick_test':
+            return 'Quick MCQ Test';
+        case 'unit_test':
+            return 'Unit Test';
+        case 'ese':
+            return 'End Semester Exam';
+        case 'all':
+            return 'All MCQs';
+        case 'history':
+            return 'Results History';
+        case '1':
+            return 'I';
+        case '2':
+            return 'II';
+        default:
+            return seg;
+    }
+}

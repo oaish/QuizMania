@@ -1,10 +1,24 @@
 "use client"
 
-import {BreadcrumbItem, Breadcrumbs, Link} from "@nextui-org/react";
-import {getBreadcrumbs} from "@/app/state";
+import {BreadcrumbItem, Breadcrumbs} from "@nextui-org/react";
+import {usePathname} from 'next/navigation';
+import {useEffect, useState} from "react";
+import {splitPath} from "@/app/lib/helper";
 
 const BreadCrumbsLayout = () => {
-    const crumbs = getBreadcrumbs()
+    const pathname = usePathname();
+    let crumbs = [];
+    if (pathname === "/") {
+        crumbs = [
+            {
+                path: "/",
+                name: "Home",
+            }
+        ]
+    } else {
+        crumbs = splitPath(pathname)
+    }
+
     return (
         <div className=" absolute top-20 mx-3">
             <Breadcrumbs

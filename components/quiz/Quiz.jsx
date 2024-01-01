@@ -1,17 +1,22 @@
+"use client"
 import React, {useEffect, useRef, useState} from 'react'
 import {formatTime, generateUniqueNumbers} from "@/app/lib/helper";
 import CustomSkeleton from "@/components/quiz/CustomSkeleton";
 import QuestionCard from "@/components/quiz/QuestionCard";
 import {Button, Link, Pagination} from "@nextui-org/react";
 import DigiClock from "@/components/quiz/DigiClock";
+import {useRouter} from 'next/navigation'
+import {useSnapshot} from "valtio";
+import {store} from "@/app/lib/store";
 
-const Quiz = ({sec, URL, count, max, type, hour, marks, image, sub}) => {
+const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
     const containerRef = useRef(null);
+    const router = useRouter();
 
     const [index, setIndex] = useState(0);
     const [seconds, setSeconds] = useState(sec);
     const [loading, setLoading] = useState(true);
-    const [results, setResults] = useState([]);
+    const [resultStats, setResultStats] = useState([]);
     const [mcqs, setMcqs] = useState([
         {
             id: 1,
@@ -23,13 +28,17 @@ const Quiz = ({sec, URL, count, max, type, hour, marks, image, sub}) => {
         }
     ]);
 
+    const snap = useSnapshot(store);
     let opt = ["A", "B", "C", "D", "E"]
 
     async function getQuestions() {
-        const res = await fetch(URL);
+        let res = await fetch(HOST + URL);
         const bigData = await res.json();
         const data = []
-        const ind = generateUniqueNumbers(1, max, count)
+        res = await fetch(HOST + `/api/get/table-length?table=${sub}_questions`)
+        const tableLength = await res.json();
+        let max = tableLength[0].count
+        const ind = generateUniqueNumbers(0, max - 1, count)
         for (let i = 0; i < count; i++) {
             data.push(bigData[ind[i]])
         }
@@ -39,8 +48,9 @@ const Quiz = ({sec, URL, count, max, type, hour, marks, image, sub}) => {
                 selectedIndex: -1,
                 selectedAnswer: "", correctAnswer: mcq.ans, isCorrect: false
             })
+
         })
-        setResults(arr)
+        setResultStats(arr)
         setMcqs(data)
     }
 
@@ -72,18 +82,18 @@ const Quiz = ({sec, URL, count, max, type, hour, marks, image, sub}) => {
     }
 
     function handleRBChange(opt, idx) {
-        let res = [...results]
+        let res = [...resultStats]
 
         res[index].selectedIndex = idx
         res[index].selectedAnswer = opt
         res[index].isCorrect = opt === res[index].correctAnswer
-        setResults(res)
+        setResultStats(res)
     }
 
     function endExam() {
         let correct = 0
         let attempted = 0
-        results.forEach(res => {
+        resultStats.forEach(res => {
             if (res.selectedAnswer !== "") {
                 attempted++
             }
@@ -94,27 +104,24 @@ const Quiz = ({sec, URL, count, max, type, hour, marks, image, sub}) => {
 
         let history = mcqs.map((item, index) => ({
             ...item,
-            result: results[index]
+            result: resultStats[index]
         }));
 
-        let res = {
+        store.results = {
             type: type,
+            sub: sub,
             hour: hour,
             marks: marks,
             image: image,
             history: history,
             correct: correct,
             attempted: attempted,
-            total: results.length,
-            percentage: (correct / results.length) * 100,
+            total: resultStats.length,
+            percentage: (correct / resultStats.length) * 100,
             timeTaken: formatTime(sec - seconds)
         }
 
-        console.log(res.percentage, res.correct, results.length)
-
-        let json = JSON.stringify(res)
-        localStorage.setItem("results", json)
-        window.location.href = `/${sub}/results`
+        router.push(`/${sub}/results`)
     }
 
     return (<>

@@ -16,6 +16,7 @@ import {
 import {AcmeLogo} from "@/components/home/AcmeLogo";
 import {NextUIProvider} from '@nextui-org/react'
 import {useState} from "react";
+import BreadCrumbsLayout from "@/components/home/BreadCrumbsLayout";
 
 export function Providers({children}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -90,6 +91,7 @@ export function Providers({children}) {
                     ))}
                 </NavbarMenu>
             </Navbar>
+            <BreadCrumbsLayout/>
             {children}
         </NextUIProvider>
     )
