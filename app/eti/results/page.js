@@ -1,7 +1,7 @@
 "use client";
 require("dotenv").config();
-import {useEffect, useRef} from "react";
-import {Button, Card, CardBody, CardHeader, Image, Link} from "@nextui-org/react";
+import {useEffect, useRef, useState} from "react";
+import {Button, Card, CardBody, CardHeader, Image} from "@nextui-org/react";
 import ChevronDownIcon from "@/components/quiz/ChevronDownIcon";
 import Result from "@/components/quiz/Result";
 import "@/components/quiz/Results.css";
@@ -23,6 +23,7 @@ const Page = () => {
     const containerRef = useRef(null);
     const snap = useSnapshot(store);
     const {results} = snap
+    const [isMobile, setIsMobile] = useState(false);
 
     const body = JSON.stringify({...snap.results, username: snap.username})
 
@@ -39,12 +40,15 @@ const Page = () => {
     }
 
     useEffect(() => {
+        if (window.innerWidth < 768) {
+            setIsMobile(true);
+        }
         setResult()
-    },[])
+    }, [])
 
     return (
         <>
-            <main ref={containerRef} className="flex justify-center w-[100%] mt-20 p-20">
+            <main ref={containerRef} className="flex justify-center w-[100%] mt-20 lg:p-20 p-5">
                 <div className="w-[600px] relative bg-stone-800 grid-cols-2 grid rounded-lg">
                     <Card className="bg-transparent py-4 rounded-none">
                         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
@@ -70,7 +74,7 @@ const Page = () => {
                             <CustomText label="Correct:" value={results.correct + " / " + results.total}/>
                         </CardHeader>
                         <CardBody>
-                            <Result percentage={results.percentage.toFixed(1)}/>
+                            <Result size={isMobile ? "100": "200"} percentage={results.percentage.toFixed(1)}/>
                         </CardBody>
                     </Card>
                     <div className="btn-x">
@@ -80,13 +84,14 @@ const Page = () => {
                         <Button color="warning" variant="bordered" onPress={() => router.push(`/history`)}>
                             Results History
                         </Button>
-                        <Button color="warning" variant="bordered" onPress={() => router.push(`#history`)} endContent={<ChevronDownIcon/>}>
+                        <Button color="warning" variant="bordered" onPress={() => router.push(`#history`)}
+                                endContent={<ChevronDownIcon/>}>
                             Check Answers
                         </Button>
                     </div>
                 </div>
             </main>
-            <div id="history" className="flex flex-col items-center justify-center w-full mt-10 m-auto p-10 gap-4">
+            <div id="history" className="flex flex-col items-center justify-center w-full mt-10 m-auto lg:p-10 gap-4">
                 {
                     results.history.map((item, index) => (
                         <ResultQuestionCard key={index} {...item}/>

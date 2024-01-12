@@ -16,3 +16,11 @@
     flex-direction: column;
     gap: 10px;
 }
+
+@media (max-width: 768px) {
+    .btn-x {
+        position: relative;
+        translate: 100%;
+        padding: 10px;
+    }
+}

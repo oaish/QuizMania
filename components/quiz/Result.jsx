@@ -1,7 +1,7 @@
 import "@/components/quiz/Results.css";
 import {useEffect, useState} from "react";
 
-export default function Result({percentage}) {
+export default function Result({percentage, size}) {
     let percentageInt = parseInt(percentage);
     const [value, setValue] = useState(0);
     const [color, setColor] = useState("");
@@ -32,8 +32,8 @@ export default function Result({percentage}) {
     const dashArray = Math.PI * 2 * radius;
     const dashOffset = dashArray - (dashArray * value) / 100;
     return (<div className="flex h-full items-center justify-center">
-            <div className="text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style={{color: color}}>{percentage + "%"}</div>
-            <svg width="200" height="200" viewBox="0 0 200 200">
+            <div className="text-2xl lg:text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style={{color: color}}>{percentage + "%"}</div>
+            <svg width={size} height={size} viewBox="0 0 200 200">
                 <circle cx="100" cy="100" strokeWidth="15px" r={radius} className="circle-background"/>
                 <circle
                     cx="100" cy="100"

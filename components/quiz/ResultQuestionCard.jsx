@@ -33,7 +33,7 @@ const QuestionCard = (props) => {
     }
 
     return (
-        <div className="pointer-events-none w-[90%] bg-neutral-800 rounded-lg p-4 items-center gap-4">
+        <div className="pointer-events-none w-[95%] lg:w-[90%] bg-neutral-800 rounded-lg p-4 items-center gap-4">
             <Card radius="sm">
                 <CardBody className="border-warning">
                     <p>{question}</p>
