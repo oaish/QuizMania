@@ -15,7 +15,7 @@ export default function App() {
     }
     
     return (
-        <main className="flex flex-col lg:flex-row justify-center w-full mt-20 p-20 text-center">
+        <main className="flex flex-col lg:flex-row justify-center w-full mt-20 p-4 lg:p-20 text-center">
             <Card shadow="sm" isPressable onPress={() => handleCardPress("eti")}>
                 <CardBody className="overflow-visible p-0">
                     <Image
@@ -23,7 +23,7 @@ export default function App() {
                         radius="lg"
                         width="100%"
                         alt=""
-                        className="w-full object-cover h-[270px]"
+                        className="w-full object-cover lg:h-[270px] aspect-video"
                         src="/eti.webp"
                     />
                 </CardBody>
@@ -40,7 +40,7 @@ export default function App() {
                         radius="lg"
                         width="100%"
                         alt=""
-                        className="w-full object-cover h-[270px]"
+                        className="w-full object-cover h-[270px] aspect-video"
                         src="/man.jpg"
                     />
                 </CardBody>
