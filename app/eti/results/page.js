@@ -43,6 +43,7 @@ const Page = () => {
         if (window.innerWidth < 768) {
             setIsMobile(true);
         }
+        console.log(results)
         setResult()
     }, [])
 

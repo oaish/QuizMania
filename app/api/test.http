@@ -1,4 +1,4 @@
-POST http://localhost:3000/api/post/user/new
+POST http://localhost:3000/api/get/all-questions/
 Content-Type: application/json
 
 {
@@ -7,4 +7,4 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/api/get/user?username=Azlan
+GET http://localhost:3000/api/get/all-questions/

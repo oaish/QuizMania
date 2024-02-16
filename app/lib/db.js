@@ -1,19 +1,12 @@
-import mysql from "mysql2/promise"
-require('dotenv').config()
-// create the connection to database
-console.log("connecting to database...")
-const connection = await mysql.createConnection(process.env.DATABASE_URL);
-console.log("connected to database")
+import mongoose from "mongoose";
 
-export default async function executeQuery(query, values) {
+const connect = async () => {
     try {
-        const [rows] = await connection.execute(query,values);
-        return rows
+        await mongoose.connect(process.env.DATABASE_URL)
     }
     catch (e) {
         console.error(e)
-        return null;
     }
 }
 
-
+export default connect

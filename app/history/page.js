@@ -64,10 +64,10 @@ export default function Page() {
                 </TableHeader>
                 <TableBody items={rows}>
                     {(item) => (
-                        <TableRow key={item.key}>
-                            <TableCell>{item.key}</TableCell>
+                        <TableRow key={item._id}>
+                            <TableCell>{item._id.slice(-2).toUpperCase()}</TableCell>
                             <TableCell>{item.type}</TableCell>
-                            <TableCell>{item.sub.toUpperCase()}</TableCell>
+                            <TableCell>{item.sub?.toUpperCase()}</TableCell>
                             <TableCell>{item.marks + " M"}</TableCell>
                             <TableCell>{item.timeTaken}</TableCell>
                             <TableCell>{item.attempted + " / " + item.marks}</TableCell>

@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server";
-import executeQuery from "@/app/lib/db";
+import Question from "@/models/Question";
+import connect from "@/app/lib/db";
 
 export const dynamic = 'force-dynamic'
 
@@ -8,11 +9,8 @@ export async function GET(req) {
         const {searchParams} = await req.nextUrl;
         const limit = searchParams.get('limit');
         const table = searchParams.get('table');
-        let questions
-        if (limit)
-            questions= await executeQuery(`SELECT * FROM ${table} LIMIT ?`, [limit])
-        else
-            questions = await executeQuery(`SELECT * FROM ${table}`)
+        await connect()
+        let questions = await Question.find().where({subject: table}).limit(limit);
         return NextResponse.json(questions);
     } catch (error) {
         console.error('Error:', error.message);
@@ -20,4 +18,4 @@ export async function GET(req) {
     }
 }
 
-//http://localhost:3000/api/get/all-questions?table=eti_questions&limit=20
+//http://localhost:3000/api/get/all-questions?table=ETI&limit=20

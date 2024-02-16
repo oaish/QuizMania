@@ -8,7 +8,7 @@ const Page = () => {
     const [loading, setLoading] = useState([])
 
     async function getQuestions() {
-        const res = await fetch(process.env.NEXT_PUBLIC_HOST + '/api/get/all-questions?table=eti_questions')
+        const res = await fetch(process.env.NEXT_PUBLIC_HOST + '/api/get/all-questions?table=ETI')
         const data = await res.json()
         setQuestions(data)
     }

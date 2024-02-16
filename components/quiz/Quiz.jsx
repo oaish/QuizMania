@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from 'react'
 import {formatTime, generateUniqueNumbers} from "@/app/lib/helper";
 import CustomSkeleton from "@/components/quiz/CustomSkeleton";
 import QuestionCard from "@/components/quiz/QuestionCard";
-import {Button, Link, Pagination, Skeleton} from "@nextui-org/react";
+import {Button, Pagination} from "@nextui-org/react";
 import DigiClock from "@/components/quiz/DigiClock";
 import {useRouter} from 'next/navigation'
 import {useSnapshot} from "valtio";
@@ -24,7 +24,8 @@ const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
             options: ["London", "Paris", "Berlin", "Madrid"],
             answer: "Paris",
             ans: "B",
-            unit: "I"
+            unit: "I",
+            subject: "ETI"
         }
     ]);
 
@@ -35,20 +36,19 @@ const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
         let res = await fetch(HOST + URL);
         const bigData = await res.json();
         const data = []
-        res = await fetch(HOST + `/api/get/table-length?table=${sub}_questions`)
-        const tableLength = await res.json();
-        let max = tableLength[0].count
+        res = await fetch(HOST + `/api/get/table-length?table=${sub.toUpperCase()}`)
+        let max = await res.json();
         const ind = generateUniqueNumbers(0, max - 1, count)
         for (let i = 0; i < count; i++) {
             data.push(bigData[ind[i]])
         }
         let arr = []
         data.forEach(mcq => {
+            const ans = opt[mcq.options.indexOf(mcq.answer)]
             arr.push({
                 selectedIndex: -1,
-                selectedAnswer: "", correctAnswer: mcq.ans, isCorrect: false
+                selectedAnswer: "", correctAnswer: ans, isCorrect: false
             })
-
         })
         setResultStats(arr)
         setMcqs(data)
@@ -88,6 +88,13 @@ const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
         res[index].selectedAnswer = opt
         res[index].isCorrect = opt === res[index].correctAnswer
         setResultStats(res)
+        if (index !== mcqs.length - 1) {
+            setTimeout(() => {
+                setIndex(index + 1)
+                containerRef.current.childNodes[index].style.display = "none";
+                containerRef.current.childNodes[index + 1].style.display = "block";
+            }, 1000)
+        }
     }
 
     function endExam() {
@@ -142,14 +149,15 @@ const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
                         ))
                     }
                 </main>
-                <div className="flex lg:flex-row flex-col items-center lg:justify-center absolute bottom-10 w-full m-0 p-0">
+                <div
+                    className="flex lg:flex-row flex-col items-center lg:justify-center absolute bottom-10 w-full m-0 p-0">
                     <Pagination showShadow showControls onChange={(i) => handlePageChange(i)} size="lg"
-                                color="warning" total={count} initialPage={1}
+                                color="warning" total={count} page={index + 1}
                     />
                     <div className="lg:absolute mt-5 ml-48 lg:right-20">
-                            <Button onClick={endExam} isLoading={loading} variant="bordered" color="danger">
-                                End Exam
-                            </Button>
+                        <Button onClick={endExam} isLoading={loading} variant="bordered" color="danger">
+                            End Exam
+                        </Button>
                     </div>
                 </div>
                 <DigiClock endExam={endExam} limit={seconds} setSeconds={setSeconds}/>

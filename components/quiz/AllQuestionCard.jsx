@@ -5,10 +5,12 @@ import {CustomRadioBox} from "@/components/quiz/CustomRadioBox";
 import Spoiler from "@/components/quiz/Spoiler";
 
 const AllQuestionCard = ({mcq, idx}) => {
-    const {question, options, ans} = mcq
+    const {question, options, answer} = mcq
     const [isValid, setIsValid] = useState(true)
     const [isRevealed, setIsRevealed] = useState(false)
     let correctIndex = -1
+    let opt = ["A", "B", "C", "D", "E"]
+    const ans = opt[mcq.options.indexOf(mcq.answer)]
 
     switch (ans) {
         case "A":
