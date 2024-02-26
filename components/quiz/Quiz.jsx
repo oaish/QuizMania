@@ -36,8 +36,7 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
         let res = await fetch(URL);
         const bigData = await res.json();
         const data = []
-        res = await fetch(`/api/get/table-length?table=${sub.toUpperCase()}`)
-        let max = await res.json();
+        let max = bigData.length
         const ind = generateUniqueNumbers(0, max - 1, count)
         for (let i = 0; i < count; i++) {
             data.push(bigData[ind[i]])
@@ -50,6 +49,7 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
                 selectedAnswer: "", correctAnswer: ans, isCorrect: false
             })
         })
+        console.log("MCQ MAP:", performance.now())
         setResultStats(arr)
         setMcqs(data)
     }

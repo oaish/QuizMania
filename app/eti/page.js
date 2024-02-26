@@ -12,6 +12,7 @@ import {
     useDisclosure
 } from "@nextui-org/react";
 import {useRouter} from "next/navigation";
+import {useEffect} from "react";
 
 const Page = () => {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();

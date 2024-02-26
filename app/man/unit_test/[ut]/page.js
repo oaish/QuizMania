@@ -5,7 +5,7 @@ const Page = ({params}) => {
     return (
         <Quiz
             HOST={process.env.NEXT_PUBLIC_HOST}
-            URL={`/api/get/all-questions?table=man_questions&ut=${params.ut}`}
+            URL={`/api/get/all-questions?table=MAN&ut=${params.ut}`}
             count={20}
             sec={3600}
             sub="man"

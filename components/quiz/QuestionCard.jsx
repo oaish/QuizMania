@@ -7,7 +7,6 @@ const QuestionCard = ({question, options, opt, onChange, idx}) => {
     return (
         <>
             <div className="relative bg-neutral-800 rounded-lg p-4 items-center gap-4">
-                {/*<div className="absolute top-0 left-4 p-5" style={{ translate: '0 -90%', zIndex: -1, borderRadius: "10px 10px 0 0 ",backgroundColor: "#18181b"}}>{idx + 1}</div>*/}
                 <Card radius="sm">
                     <CardBody className="border-warning">
                         <p>{`${idx + 1}. ${question}`}</p>

@@ -1,10 +1,14 @@
 "use client";
-import {useRef} from "react";
-import {Button, Card, CardBody, CardHeader, Image, Link} from "@nextui-org/react";
+require("dotenv").config();
+import {useEffect, useRef, useState} from "react";
+import {Button, Card, CardBody, CardHeader, Image} from "@nextui-org/react";
 import ChevronDownIcon from "@/components/quiz/ChevronDownIcon";
 import Result from "@/components/quiz/Result";
 import "@/components/quiz/Results.css";
 import ResultQuestionCard from "@/components/quiz/ResultQuestionCard";
+import {useSnapshot} from "valtio";
+import {store} from "@/app/lib/store";
+import {useRouter} from "next/navigation";
 
 function CustomText({label, value}) {
     return (
@@ -15,27 +19,37 @@ function CustomText({label, value}) {
 }
 
 const Page = () => {
+    const router = useRouter();
     const containerRef = useRef(null);
-    let results = {
-        marks: 0,
-        hour: 0,
-        type: "",
-        timeTaken: 0,
-        total: 0,
-        attempted: 0,
-        correct: 0,
-        percentage: 0,
-        image: "",
-        history: []
-    };
+    const snap = useSnapshot(store);
+    const {results} = snap
+    const [isMobile, setIsMobile] = useState(false);
 
-    if (typeof window !== "undefined") {
-        results = JSON.parse(localStorage.getItem("results"));
+    const body = JSON.stringify({...snap.results, username: snap.username})
+
+    async function setResult() {
+        const res = await fetch(`/api/post/result`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: body
+        })
+        const data = await res.json()
+        console.log(data)
     }
+
+    useEffect(() => {
+        if (window.innerWidth < 768) {
+            setIsMobile(true);
+        }
+        console.log(results)
+        setResult()
+    }, [])
 
     return (
         <>
-            <main ref={containerRef} className="flex justify-center w-[100%] mt-20 p-20">
+            <main ref={containerRef} className="flex justify-center w-[100%] mt-20 lg:p-20 p-5">
                 <div className="w-[600px] relative bg-stone-800 grid-cols-2 grid rounded-lg">
                     <Card className="bg-transparent py-4 rounded-none">
                         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
@@ -61,20 +75,24 @@ const Page = () => {
                             <CustomText label="Correct:" value={results.correct + " / " + results.total}/>
                         </CardHeader>
                         <CardBody>
-                            <Result percentage={results.percentage.toFixed(1)}/>
+                            <Result size={isMobile ? "100": "200"} percentage={results.percentage.toFixed(1)}/>
                         </CardBody>
                     </Card>
                     <div className="btn-x">
-                        <Button color="warning" variant="bordered">
-                            <Link color="warning" href="/man">Back To Homepage</Link>
+                        <Button color="warning" variant="bordered" onPress={() => router.push(`/man`)}>
+                            Back To Homepage
                         </Button>
-                        <Button color="warning" variant="bordered" endContent={<ChevronDownIcon/>}>
-                            <Link color="warning" href="#history">Check Answers</Link>
+                        <Button color="warning" variant="bordered" onPress={() => router.push(`/history`)}>
+                            Results History
+                        </Button>
+                        <Button color="warning" variant="bordered" onPress={() => router.push(`#history`)}
+                                endContent={<ChevronDownIcon/>}>
+                            Check Answers
                         </Button>
                     </div>
                 </div>
             </main>
-            <div id="history" className="flex flex-col items-center justify-center w-full mt-10 m-auto p-10 gap-4">
+            <div id="history" className="flex flex-col items-center justify-center w-full mt-10 m-auto lg:p-10 gap-4">
                 {
                     results.history.map((item, index) => (
                         <ResultQuestionCard key={index} {...item}/>

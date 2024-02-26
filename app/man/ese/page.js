@@ -1,14 +1,12 @@
-"use client";
 import Quiz from "@/components/quiz/Quiz";
 
 const Page = () => {
     return (
         <Quiz
             HOST={process.env.NEXT_PUBLIC_HOST}
-            URL="/api/get/all-questions?table=man_questions"
+            URL="/api/get/all-questions?table=MAN"
             count={70}
             sec={5400}
-            max={31}
             sub="man"
             type="End Semester Exam"
             hour="1.5"
