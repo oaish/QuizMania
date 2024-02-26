@@ -28,7 +28,7 @@ const Page = () => {
     const body = JSON.stringify({...snap.results, username: snap.username})
 
     async function setResult() {
-        const res = await fetch(process.env.NEXT_PUBLIC_HOST + `/api/post/result`, {
+        const res = await fetch(`/api/post/result`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

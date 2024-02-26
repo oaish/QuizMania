@@ -39,8 +39,8 @@ export default function Page() {
     ];
 
     async function getResult() {
-        console.log(process.env.NEXT_PUBLIC_HOST + `/api/get/results?username=${snap.username}`)
-        const res = await fetch(process.env.NEXT_PUBLIC_HOST + `/api/get/results?username=${snap.username}`)
+        console.log(`/api/get/results?username=${snap.username}`)
+        const res = await fetch(`/api/get/results?username=${snap.username}`)
         const data = await res.json()
         setRows(data)
     }

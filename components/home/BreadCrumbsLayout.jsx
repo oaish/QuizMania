@@ -20,7 +20,7 @@ const BreadCrumbsLayout = () => {
     }
 
     return (
-        <div className=" absolute top-20 mx-3">
+        <div className="top-20 mx-3 mt-3">
             <Breadcrumbs
                 color="warning"
                 size="lg" variant="bordered"

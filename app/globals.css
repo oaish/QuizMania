@@ -3,5 +3,19 @@
 @tailwind utilities;
 
 * {
+    box-sizing: border-box;
     scroll-behavior: smooth;
+}
+
+.radio-btn {
+
+}
+
+.quiz-main-grid {
+    padding-block: 1rem;
+    width: 100%;
+    height: calc(100svh - 118px);
+    display: grid;
+    overflow-x: hidden;
+    grid-template-rows: calc(100% - 60px) 60px;
 }

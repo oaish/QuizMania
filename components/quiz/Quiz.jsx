@@ -9,7 +9,7 @@ import {useRouter} from 'next/navigation'
 import {useSnapshot} from "valtio";
 import {store} from "@/app/lib/store";
 
-const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
+const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
     const containerRef = useRef(null);
     const router = useRouter();
 
@@ -33,10 +33,10 @@ const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
     let opt = ["A", "B", "C", "D", "E"]
 
     async function getQuestions() {
-        let res = await fetch(HOST + URL);
+        let res = await fetch(URL);
         const bigData = await res.json();
         const data = []
-        res = await fetch(HOST + `/api/get/table-length?table=${sub.toUpperCase()}`)
+        res = await fetch(`/api/get/table-length?table=${sub.toUpperCase()}`)
         let max = await res.json();
         const ind = generateUniqueNumbers(0, max - 1, count)
         for (let i = 0; i < count; i++) {
@@ -133,9 +133,9 @@ const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
 
     return (<>
         {loading ? <CustomSkeleton/> :
-            <>
+            <div className={"quiz-main-grid"}>
                 <main ref={containerRef}
-                      className="flex items-center gap-4 justify-center w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                      className="flex items-center gap-4 justify-center p-4 overflow-scroll">
                     {
                         mcqs.map((mcq, index) => (
                             <QuestionCard
@@ -150,18 +150,19 @@ const Quiz = ({HOST, URL, sec, count, type, hour, marks, image, sub}) => {
                     }
                 </main>
                 <div
-                    className="flex lg:flex-row flex-col items-center lg:justify-center absolute bottom-10 w-full m-0 p-0">
+                    className="flex lg:flex-row flex-col items-center relative lg:justify-center w-full m-0 p-0">
                     <Pagination showShadow showControls onChange={(i) => handlePageChange(i)} size="lg"
                                 color="warning" total={count} page={index + 1}
                     />
-                    <div className="lg:absolute mt-5 ml-48 lg:right-20">
+                    <div className="absolute flex gap-2 mt-14 lg:mt-0 lg:right-12">
+                        <DigiClock endExam={endExam} limit={seconds} setSeconds={setSeconds}/>
                         <Button onClick={endExam} isLoading={loading} variant="bordered" color="danger">
                             End Exam
                         </Button>
                     </div>
                 </div>
-                <DigiClock endExam={endExam} limit={seconds} setSeconds={setSeconds}/>
-            </>
+
+            </div>
         }
     </>)
 }

@@ -38,12 +38,8 @@ export function Providers({children}) {
 
     return (
         <NextUIProvider>
-            <Navbar isBordered onMenuOpenChange={setIsMenuOpen}>
+            <Navbar isBordered>
                 <NavbarContent>
-                    <NavbarMenuToggle
-                        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                        className="sm:hidden"
-                    />
                     <NavbarBrand>
                         <AcmeLogo />
                         <p className="font-bold text-xl text-inherit">QUIZMania</p>
@@ -62,7 +58,6 @@ export function Providers({children}) {
                                 size="sm"
                                 radius="sm"
                                 src="/AK.jpg"
-                                //https://i.pravatar.cc/150?u=a04258a2462d826712d
                             />
                         </DropdownTrigger>
                         <DropdownMenu aria-label="Profile Actions" variant="flat">
@@ -79,22 +74,6 @@ export function Providers({children}) {
                         </DropdownMenu>
                     </Dropdown>
                 </NavbarContent>
-                <NavbarMenu>
-                    {menuItems.map((item, index) => (
-                        <NavbarMenuItem key={`${item}-${index}`}>
-                            <Link
-                                color={
-                                    index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-                                }
-                                className="w-full"
-                                href="#"
-                                size="lg"
-                            >
-                                {item}
-                            </Link>
-                        </NavbarMenuItem>
-                    ))}
-                </NavbarMenu>
             </Navbar>
             <BreadCrumbsLayout/>
             {children}
