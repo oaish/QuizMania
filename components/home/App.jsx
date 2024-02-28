@@ -1,10 +1,5 @@
 "use client"
-import {
-    Image,
-    Card,
-    CardBody,
-    CardFooter, Spacer
-} from "@nextui-org/react";
+import {Card, CardBody, CardFooter, Image} from "@nextui-org/react";
 import {useRouter} from "next/navigation";
 
 export default function App() {
@@ -13,7 +8,7 @@ export default function App() {
     function handleCardPress(path) {
         router.push("/" + path);
     }
-    
+
     return (
         <main className="flex flex-col gap-20 lg:flex-row justify-center w-full mt-12 lg:mt-20 p-4 lg:p-20 text-center">
             <Card shadow="sm" isPressable onPress={() => handleCardPress("eti")}>

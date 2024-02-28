@@ -1,14 +1,11 @@
 "use client";
 
-import {getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
+import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
 import {useEffect, useState} from "react";
 import {useSnapshot} from "valtio";
 import {store} from "@/app/lib/store";
 
-const rows = [""];
-
 export default function Page() {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const snap = useSnapshot(store)
     const [rows, setRows] = useState([]);
 
@@ -48,7 +45,7 @@ export default function Page() {
 
     useEffect(() => {
         getResult()
-    }, [])
+    }, [getResult])
 
     return (
         <div className="flex w-[100%] mt-10 lg:mt-0 lg:p-20">

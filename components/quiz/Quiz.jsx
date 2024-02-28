@@ -6,7 +6,6 @@ import QuestionCard from "@/components/quiz/QuestionCard";
 import {Button, Pagination} from "@nextui-org/react";
 import DigiClock from "@/components/quiz/DigiClock";
 import {useRouter} from 'next/navigation'
-import {useSnapshot} from "valtio";
 import {store} from "@/app/lib/store";
 
 const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
@@ -29,7 +28,6 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
         }
     ]);
 
-    const snap = useSnapshot(store);
     let opt = ["A", "B", "C", "D", "E"]
 
     async function getQuestions() {
@@ -57,7 +55,7 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
         getQuestions().then(() => {
             setLoading(false)
         });
-    }, []);
+    }, [getQuestions]);
 
     useEffect(() => {
         if (containerRef.current) {
