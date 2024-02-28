@@ -8,6 +8,7 @@ import {store} from "@/app/lib/store";
 const rows = [""];
 
 export default function Page() {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const snap = useSnapshot(store)
     const [rows, setRows] = useState([]);
 
@@ -50,29 +51,29 @@ export default function Page() {
     }, [])
 
     return (
-        <div className="flex justify-center w-[100%] mt-20 p-20">
+        <div className="flex w-[100%] mt-10 lg:mt-0 lg:p-20">
             <Table aria-label="Example table with dynamic content">
                 <TableHeader columns={columns}>
                     <TableColumn>ID</TableColumn>
                     <TableColumn>NAME</TableColumn>
-                    <TableColumn>SUBJECT</TableColumn>
-                    <TableColumn>MARKS</TableColumn>
-                    <TableColumn>TIME TAKEN</TableColumn>
                     <TableColumn>ATTEMPTED</TableColumn>
                     <TableColumn>CORRECT</TableColumn>
                     <TableColumn>PERCENTAGE</TableColumn>
+                    <TableColumn>SUBJECT</TableColumn>
+                    <TableColumn>MARKS</TableColumn>
+                    <TableColumn>TIME TAKEN</TableColumn>
                 </TableHeader>
                 <TableBody items={rows}>
                     {(item) => (
                         <TableRow key={item._id}>
                             <TableCell>{item._id.slice(-2).toUpperCase()}</TableCell>
                             <TableCell>{item.type}</TableCell>
-                            <TableCell>{item.sub?.toUpperCase()}</TableCell>
-                            <TableCell>{item.marks + " M"}</TableCell>
-                            <TableCell>{item.timeTaken}</TableCell>
                             <TableCell>{item.attempted + " / " + item.marks}</TableCell>
                             <TableCell>{item.correct + " / " + item.marks}</TableCell>
                             <TableCell>{item.percentage + "%"}</TableCell>
+                            <TableCell>{item.sub?.toUpperCase()}</TableCell>
+                            <TableCell>{item.marks + " M"}</TableCell>
+                            <TableCell>{item.timeTaken}</TableCell>
                         </TableRow>
                     )}
                 </TableBody>

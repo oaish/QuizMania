@@ -15,7 +15,7 @@ export default function App() {
     }
     
     return (
-        <main className="flex flex-col lg:flex-row justify-center w-full mt-20 p-4 lg:p-20 text-center">
+        <main className="flex flex-col gap-20 lg:flex-row justify-center w-full mt-12 lg:mt-20 p-4 lg:p-20 text-center">
             <Card shadow="sm" isPressable onPress={() => handleCardPress("eti")}>
                 <CardBody className="overflow-visible p-0">
                     <Image
@@ -32,7 +32,6 @@ export default function App() {
                     <p className="text-default-500">ETI - MCQs</p>
                 </CardFooter>
             </Card>
-            <Spacer x="20" y="20"/>
             <Card shadow="sm" isPressable onPress={() => handleCardPress("man")}>
                 <CardBody className="overflow-visible p-0">
                     <Image

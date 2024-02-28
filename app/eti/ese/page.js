@@ -3,7 +3,6 @@ import Quiz from "@/components/quiz/Quiz";
 const Page = () => {
     return (
         <Quiz
-            HOST={process.env.NEXT_PUBLIC_HOST}
             URL="/api/get/all-questions?table=ETI"
             count={70}
             sec={5400}

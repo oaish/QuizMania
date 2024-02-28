@@ -49,7 +49,6 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
                 selectedAnswer: "", correctAnswer: ans, isCorrect: false
             })
         })
-        console.log("MCQ MAP:", performance.now())
         setResultStats(arr)
         setMcqs(data)
     }
@@ -134,8 +133,20 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
     return (<>
         {loading ? <CustomSkeleton/> :
             <div className={"quiz-main-grid"}>
+                <div
+                    className="flex lg:flex-row flex-col items-center relative lg:justify-center w-full m-0 p-0">
+                    <Pagination showShadow showControls onChange={(i) => handlePageChange(i)} size="lg"
+                                color="warning" total={count} page={index + 1}
+                    />
+                    <div className="absolute flex gap-2 mt-14 lg:mt-0 lg:right-12">
+                        <DigiClock endExam={endExam} limit={seconds} setSeconds={setSeconds}/>
+                        <Button onClick={endExam} isLoading={loading} variant="bordered" color="danger">
+                            End Exam
+                        </Button>
+                    </div>
+                </div>
                 <main ref={containerRef}
-                      className="flex items-center gap-4 justify-center p-4 overflow-scroll">
+                      className="flex items-center gap-4 justify-center p-4">
                     {
                         mcqs.map((mcq, index) => (
                             <QuestionCard
@@ -149,18 +160,7 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
                         ))
                     }
                 </main>
-                <div
-                    className="flex lg:flex-row flex-col items-center relative lg:justify-center w-full m-0 p-0">
-                    <Pagination showShadow showControls onChange={(i) => handlePageChange(i)} size="lg"
-                                color="warning" total={count} page={index + 1}
-                    />
-                    <div className="absolute flex gap-2 mt-14 lg:mt-0 lg:right-12">
-                        <DigiClock endExam={endExam} limit={seconds} setSeconds={setSeconds}/>
-                        <Button onClick={endExam} isLoading={loading} variant="bordered" color="danger">
-                            End Exam
-                        </Button>
-                    </div>
-                </div>
+
 
             </div>
         }

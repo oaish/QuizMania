@@ -24,7 +24,7 @@ const Page = () => {
     }
 
     return (
-        <main className="flex flex-col lg:flex-row sm:gap-10 lg:justify-around w-full mt-5 lg:mt-20 p-20 text-center">
+        <main className="flex flex-col lg:flex-row sm:gap-10 lg:justify-around w-full mt-5 lg:mt-20 py-10 px-20 text-center">
             <div className="mb-10">
                 <Card className="py-4" isPressable onClick={() => handleCardClick("all")}>
                     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
