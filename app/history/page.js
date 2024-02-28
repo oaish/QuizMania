@@ -45,7 +45,7 @@ export default function Page() {
 
     useEffect(() => {
         getResult()
-    }, [getResult])
+    }, [])
 
     return (
         <div className="flex w-[100%] mt-10 lg:mt-0 lg:p-20">
