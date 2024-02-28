@@ -55,7 +55,7 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
         getQuestions().then(() => {
             setLoading(false)
         });
-    }, [getQuestions]);
+    }, []);
 
     useEffect(() => {
         if (containerRef.current) {
