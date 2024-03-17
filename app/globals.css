@@ -21,3 +21,35 @@
         grid-template-rows: 100px calc(100% - 100px);
     }
 }
+
+.unit-card {
+    width: 100%;
+    height: 50px;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    background-image: url("https://www.transparenttextures.com/patterns/white-diamond-dark.png");
+}
+
+.unit-btn-group {
+    position: fixed;
+    top: 32px;
+    left: 20px;
+    gap: 10px;
+    translate: 0 -50%;
+}
+
+.unit-btn-group a {
+    padding: 5px;
+    width: 30px;
+    text-align: center;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}

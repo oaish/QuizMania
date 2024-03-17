@@ -5,7 +5,7 @@ const Page = ({params}) => {
     return (
         <Quiz
             
-            URL={`/api/get/all-questions?table=ETI&ut=${params.ut}`}
+            URL={`/api/get/all-questions?table=ETI&ut=${params.ut}&limit=20`}
             count={20}
             sec={3600}
             sub="eti"

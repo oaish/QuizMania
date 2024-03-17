@@ -9,12 +9,28 @@ export async function GET(req) {
         const {searchParams} = await req.nextUrl;
         const limit = searchParams.get('limit');
         const table = searchParams.get('table');
+        const ut = searchParams.get('ut');
         await connect()
-        let questions = await Question.find().where({subject: table}).limit(limit);
+        let units = [];
+        let questions = [];
+
+        if (ut) {
+            if (ut === "1") {
+                units = ["I", "II", "III"];
+                questions = await Question.find().where({subject: table}).limit(limit).where({unit: {$in: units}});
+                return NextResponse.json(questions);
+            } else {
+                units = ["IV", "V", "VI"];
+                questions = await Question.find().where({subject: table}).limit(limit).where({unit: {$in: units}});
+                return NextResponse.json(questions);
+            }
+        }
+
+        questions = await Question.find().where({subject: table}).limit(limit);
         return NextResponse.json(questions);
     } catch (error) {
         console.error('Error:', error.message);
-        return NextResponse.json({ error: 'Internal Server Error: ' + error.message, status: 500 });
+        return NextResponse.json({error: 'Internal Server Error: ' + error.message, status: 500});
     }
 }
 
