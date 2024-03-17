@@ -43,7 +43,7 @@ const AllQuestionCard = ({mcq, idx}) => {
 
     return (
         <div className="relative mb-10 w-[100%] bg-neutral-800 rounded-lg p-4 items-center gap-4">
-            <div className="absolute top-8 left-0 p-5" style={{ borderRadius: "10px 0 0 10px", translate: "-100%", backgroundColor: "#18181b"}}>{idx + 1}</div>
+            <div className="absolute top-8 left-0 p-3" style={{ borderRadius: "10px 0 0 10px", translate: "-100%", backgroundColor: "#18181b"}}>{idx + 1}</div>
             <Card radius="sm">
                 <CardBody className="border-warning">
                     <p>{question}</p>

@@ -112,7 +112,7 @@ const Page = () => {
                                 }}>
                                     Unit I
                                 </Button>
-                                <Button color="warning" onPress={() => () => {
+                                <Button color="warning" onPress={() => {
                                     handleCardClick("unit_test/2");
                                 }}>
                                     Unit II

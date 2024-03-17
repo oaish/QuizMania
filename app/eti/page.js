@@ -105,14 +105,11 @@ const Page = () => {
                             <ModalHeader className="flex">Choose Unit:</ModalHeader>
                             <ModalBody className="pt-0 mx-3 mb-3">
                                 <Button color="warning" variant="bordered" onPress={() => {
-                                    if (typeof window !== "undefined") {
-                                        localStorage.setItem("ut", "1");
-                                    }
                                     handleCardClick("unit_test/1");
                                 }}>
                                     Unit I
                                 </Button>
-                                <Button color="warning" onPress={() => () => {
+                                <Button color="warning" onPress={() => {
                                     handleCardClick("unit_test/2");
                                 }}>
                                     Unit II

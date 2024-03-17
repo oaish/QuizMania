@@ -69,7 +69,7 @@ const Page = () => {
     }
 
     return (
-        <div className="mt-20 mx-auto flex flex-col justify-center w-[80%] rounded-lg p-2 items-center gap-4">
+        <div className="mt-10 mx-auto flex flex-col justify-center w-[80%] rounded-lg p-2 items-center gap-4">
             {loading ? <CustomSkeleton/> :
                 questions.map((question, idx) => {
                      if (idx === getUnitIndex("I") && question.unit === "I") {
