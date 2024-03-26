@@ -17,16 +17,14 @@ export async function GET(req) {
         if (ut) {
             if (ut === "1") {
                 units = ["I", "II", "III"];
-                questions = await Question.find().where({subject: table}).limit(limit).where({unit: {$in: units}});
-                return NextResponse.json(questions);
             } else {
                 units = ["IV", "V", "VI"];
-                questions = await Question.find().where({subject: table}).limit(limit).where({unit: {$in: units}});
-                return NextResponse.json(questions);
             }
+            questions = await Question.find().where({subject: table, unit: {$in: units}});
+            return NextResponse.json(questions);
         }
 
-        questions = await Question.find().where({subject: table}).limit(limit);
+        questions = await Question.find().where({subject: table});
         return NextResponse.json(questions);
     } catch (error) {
         console.error('Error:', error.message);

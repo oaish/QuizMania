@@ -4,12 +4,10 @@ export function generateUniqueNumbers(min, max, count) {
     }
 
     const uniqueNumbers = new Set();
+    const range = max - min + 1;
 
     while (uniqueNumbers.size < count) {
-        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-        if (uniqueNumbers.has(randomNumber)) {
-            continue;
-        }
+        const randomNumber = Math.floor(Math.random() * range) + min;
         uniqueNumbers.add(randomNumber);
     }
 

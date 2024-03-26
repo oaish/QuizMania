@@ -158,8 +158,6 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
                         ))
                     }
                 </main>
-
-
             </div>
         }
     </>)
