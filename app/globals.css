@@ -13,7 +13,10 @@
     height: calc(100svh - 118px);
     display: grid;
     overflow-x: hidden;
-    grid-template-rows: 60px calc(100% - 60px) ;
+    grid-template-rows: 60px calc(100% - 60px);
+    @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        row-gap: 4rem;
+    }
 }
 
 @media (max-width: 768px) {

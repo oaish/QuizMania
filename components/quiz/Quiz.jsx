@@ -136,7 +136,7 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
                     <Pagination showShadow showControls onChange={(i) => handlePageChange(i)} size="lg"
                                 color="warning" total={count} page={index + 1}
                     />
-                    <div className="absolute flex gap-2 mt-14 lg:mt-0 lg:right-12">
+                    <div className="absolute flex gap-2 mt-14 lg:mt-0 lg:right-12 sm:mb-8">
                         <DigiClock endExam={endExam} limit={seconds} setSeconds={setSeconds}/>
                         <Button onClick={endExam} isLoading={loading} variant="bordered" color="danger">
                             End Exam
@@ -144,7 +144,7 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
                     </div>
                 </div>
                 <main ref={containerRef}
-                      className="flex items-center gap-4 justify-center p-4">
+                      className="flex items-center gap-4 justify-center p-4 sm:mt-5 max-w-full">
                     {
                         mcqs.map((mcq, index) => (
                             <QuestionCard
@@ -158,8 +158,6 @@ const Quiz = ({URL, sec, count, type, hour, marks, image, sub}) => {
                         ))
                     }
                 </main>
-
-
             </div>
         }
     </>)

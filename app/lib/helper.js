@@ -1,7 +1,7 @@
 export function generateUniqueNumbers(min, max, count) {
-    if (count > (max - min + 1) || max < min) {
-        throw new Error("Invalid input parameters");
-    }
+    // if (count > (max - min + 1) || max < min) {
+    //     throw new Error("Invalid input parameters");
+    // }
 
     const uniqueNumbers = new Set();
 

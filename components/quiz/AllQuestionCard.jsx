@@ -43,19 +43,21 @@ const AllQuestionCard = ({mcq, idx}) => {
 
     return (
         <div className="relative mb-10 w-[100%] bg-neutral-800 rounded-lg p-4 items-center gap-4">
-            <div className="absolute top-8 left-0 p-3" style={{ borderRadius: "10px 0 0 10px", translate: "-100%", backgroundColor: "#18181b"}}>{idx + 1}</div>
+            <div className="absolute top-8 left-0 p-3"
+                 style={{borderRadius: "10px 0 0 10px", translate: "-100%", backgroundColor: "#18181b"}}>{idx + 1}</div>
             <Card radius="sm">
                 <CardBody className="border-warning">
                     <p>{question}</p>
                 </CardBody>
             </Card>
             <Spacer y="5"/>
-            <div className="max-w-fit h-100 flex flex-col items-center gap-4 justify-around">
+            <div className="w-full h-100 flex flex-col items-left gap-4 justify-around">
                 <RadioGroup
                     isInvalid={!isValid}
                 >
                     {options.map((option, idx) => (
                         <CustomRadioBox
+                            className="max-w-full rounded-lg"
                             key={idx}
                             value={option}
                             onChange={() => handleClick(idx)}
@@ -69,7 +71,8 @@ const AllQuestionCard = ({mcq, idx}) => {
                 <CardBody className="border-warning">
                     <div className="flex items-center">
                         <div>Correct Answer:&nbsp;</div>
-                        <Spoiler isRevealed={isRevealed} setIsRevealed={setIsRevealed}>{"[" +ans + "] " + options[correctIndex]}</Spoiler>
+                        <Spoiler isRevealed={isRevealed}
+                                 setIsRevealed={setIsRevealed}>{"[" + ans + "] " + options[correctIndex]}</Spoiler>
                     </div>
                 </CardBody>
             </Card>
