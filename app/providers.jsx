@@ -13,9 +13,9 @@ import {
     DropdownTrigger,
     Dropdown,
 } from "@nextui-org/react";
-import {AcmeLogo} from "@/components/home/AcmeLogo";
+import { Image } from "@nextui-org/react";
 import {NextUIProvider} from '@nextui-org/react'
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import BreadCrumbsLayout from "@/components/home/BreadCrumbsLayout";
 import {usePathname, useRouter} from "next/navigation";
 import {store} from "@/app/lib/store";
@@ -77,14 +77,14 @@ export function Providers({children}) {
 
     return (
         <NextUIProvider>
-            <Navbar isBordered style={{borderBottom: "1px solid #ccc"}}>
+            <Navbar isBordered>
                 <NavbarContent>
                     <NavbarBrand>
                         {
                             !isAllQuestionsPage ?
                                 <>
-                                    <AcmeLogo/>
-                                    <p className="font-bold text-xl text-inherit">QUIZMania</p>
+                                    <Image src="/logo.png" alt="QUIZMania Logo" width={48} height={48}/>
+                                    <p className="font-bold text-xl text-inherit ml-2">QUIZMania</p>
                                 </>
                                 : isMobile ? <div className="flex justify-center unit-btn-group">
                                     <a title={"Jump to Unit I"} style={{backgroundColor: "goldenrod"}} href="#I">I</a>
