@@ -49,7 +49,8 @@ export function Providers({children}) {
 
         if (snap.email === "" && !isAuthPage) {
             let token = localStorage.getItem("token")
-            if (token === "null") {
+            if (token === "null" || token === null) {
+                console.log("TOKEN IS NULL")
                 router.replace('/auth/login')
             }
             const getUser = async () => {
