@@ -95,7 +95,7 @@ export function Providers({children}) {
                                     <a title={"Jump to Unit VI"} style={{backgroundColor: "rebeccapurple"}}
                                        href="#VI">VI</a>
                                 </div> : <>
-                                    <AcmeLogo/>
+                                    <Image src="/logo.png" alt="QUIZMania Logo" width={48} height={48}/>
                                     <p className="font-bold text-xl text-inherit">QUIZMania</p>
                                 </>
                         }
