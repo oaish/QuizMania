@@ -18,12 +18,16 @@ import {NextUIProvider} from '@nextui-org/react'
 import {useEffect, useState} from "react";
 import BreadCrumbsLayout from "@/components/home/BreadCrumbsLayout";
 import {usePathname, useRouter} from "next/navigation";
+import {store} from "@/app/lib/store";
+import {useSnapshot} from "valtio";
 
 export function Providers({children}) {
     const router = useRouter();
+    const snap = useSnapshot(store);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const pathname = usePathname()
     const isAllQuestionsPage = pathname.includes('/all');
+    const isAuthPage = pathname.includes('/auth');
     const [isMobile, setIsMobile] = useState(false);
     const menuItems = [
         "Profile",
@@ -41,10 +45,35 @@ export function Providers({children}) {
     useEffect(() => {
         if (window.innerWidth < 768) {
             setIsMobile(true);
-            console.clear();
-            console.log("Is Mobile");
+        }
+
+        if (snap.email === "" && !isAuthPage) {
+            let token = localStorage.getItem("token")
+            if (token === "null") {
+                router.replace('/auth/login')
+            }
+            const getUser = async () => {
+                const res = await fetch("/api/auth/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({token: token}),
+                })
+
+                const data = await res.json()
+                store.email = data.email
+                store.username = data.username
+            }
+            getUser().then()
         }
     }, [])
+
+    function handleLogout() {
+        localStorage.removeItem("token")
+        router.replace('/auth/login')
+        return undefined;
+    }
 
     return (
         <NextUIProvider>
@@ -74,36 +103,39 @@ export function Providers({children}) {
                     </NavbarBrand>
                 </NavbarContent>
 
-                <NavbarContent justify="end">
-                    <Dropdown placement="bottom-end">
-                        <DropdownTrigger>
-                            <Avatar
-                                isBordered
-                                as="button"
-                                className="transition-transform"
-                                color="warning"
-                                name="Oaish Qazi"
-                                size="sm"
-                                radius="sm"
-                                src="/AK.jpg"
-                            />
-                        </DropdownTrigger>
-                        <DropdownMenu aria-label="Profile Actions" variant="flat">
-                            <DropdownItem key="profile" className="h-14 gap-2">
-                                <p className="font-semibold">Signed in as</p>
-                                <p className="font-semibold">oaishazher@gmail.com</p>
-                            </DropdownItem>
-                            <DropdownItem key="history" onPress={() => router.push(`/history`)}>
-                                Results History
-                            </DropdownItem>
-                            <DropdownItem key="logout" color="danger">
-                                Log Out
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                </NavbarContent>
+                {
+                    !isAuthPage &&
+                    <NavbarContent justify="end">
+                        <Dropdown placement="bottom-end">
+                            <DropdownTrigger>
+                                <Avatar
+                                    isBordered
+                                    as="button"
+                                    className="transition-transform"
+                                    color="warning"
+                                    name={snap.username}
+                                    size="sm"
+                                    radius="sm"
+                                    src="/AK.jpg"
+                                />
+                            </DropdownTrigger>
+                            <DropdownMenu aria-label="Profile Actions" variant="flat">
+                                <DropdownItem key="profile" className="h-14 gap-2">
+                                    <p className="font-semibold">Signed in as</p>
+                                    <p className="font-semibold">{snap.email}</p>
+                                </DropdownItem>
+                                <DropdownItem key="history" onPress={() => router.push(`/history`)}>
+                                    Results History
+                                </DropdownItem>
+                                <DropdownItem key="logout" color="danger"
+                                              onPress={() => handleLogout()}>
+                                    Log Out
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </NavbarContent>}
             </Navbar>
-            <BreadCrumbsLayout/>
+            {!isAuthPage && <BreadCrumbsLayout/>}
             {children}
         </NextUIProvider>
     )

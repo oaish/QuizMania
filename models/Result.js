@@ -10,7 +10,7 @@ const resultSchema = new Schema({
     attempted: Number,
     correct: Number,
     percentage: Number,
-    username: String
+    email: String
 }, { timestamps: true });
 
 let Result;

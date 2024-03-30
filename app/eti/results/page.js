@@ -25,9 +25,9 @@ const Page = () => {
     const {results} = snap
     const [isMobile, setIsMobile] = useState(false);
 
-    const body = JSON.stringify({...snap.results, username: snap.username})
-
     async function setResult() {
+        const body = JSON.stringify({...snap.results, email: snap.email})
+        console.log(JSON.parse(body))
         const res = await fetch(`/api/post/result`, {
             method: 'POST',
             headers: {
@@ -43,7 +43,6 @@ const Page = () => {
         if (window.innerWidth < 768) {
             setIsMobile(true);
         }
-        console.log(results)
         setResult()
     }, [])
 
@@ -75,7 +74,7 @@ const Page = () => {
                             <CustomText label="Correct:" value={results.correct + " / " + results.total}/>
                         </CardHeader>
                         <CardBody>
-                            <Result size={isMobile ? "100": "200"} percentage={results.percentage.toFixed(1)}/>
+                            <Result size={isMobile ? "100" : "200"} percentage={results.percentage.toFixed(1)}/>
                         </CardBody>
                     </Card>
                     <div className="btn-x">

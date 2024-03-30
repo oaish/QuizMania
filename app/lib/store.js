@@ -1,7 +1,8 @@
 import { proxy } from 'valtio';
 
 export const store = proxy({
-    username: "oaish",
+    username: "",
+    email: "",
     results: {
         marks: 0,
         hour: 0,

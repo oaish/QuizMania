@@ -1,0 +1,9 @@
+.legend {
+    font-size: 14px;
+    margin: 20px;
+}
+.legend span {
+    background-color: #555;
+    padding: 5px;
+    border-radius: 5px;
+}

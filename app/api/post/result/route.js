@@ -5,8 +5,8 @@ export const dynamic = 'force-dynamic'
 
 export async function POST(req) {
     try {
-        const {type, sub, marks, timeTaken, attempted, correct, percentage, username} = await req.json();
-        let res = await Result.create({type, sub, marks, timeTaken, attempted, correct, percentage, username});
+        const {type, sub, marks, timeTaken, attempted, correct, percentage, email} = await req.json();
+        let res = await Result.create({type, sub, marks, timeTaken, attempted, correct, percentage, email});
         return NextResponse.json({ success: true, res });
     } catch (error) {
         console.error('Error:', error.message);
