@@ -15,6 +15,17 @@ const BreadCrumbsLayout = () => {
                 name: "Home",
             }
         ]
+    } else if (pathname === "/admin") {
+        crumbs = [
+            {
+                path: "/",
+                name: "Home",
+            },
+            {
+                path: "/admin",
+                name: "Admin",
+            }
+        ]
     } else {
         crumbs = splitPath(pathname)
     }

@@ -4,8 +4,7 @@ import Quiz from "@/components/quiz/Quiz";
 const Page = ({params}) => {
     return (
         <Quiz
-            
-            URL={`/api/get/all-questions?table=MAN&ut=${params.ut}&limit=20`}
+            URL={`/api/get/all-questions?table=MAN&ut=${params.ut}`}
             count={20}
             sec={3600}
             sub="man"

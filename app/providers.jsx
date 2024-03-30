@@ -50,7 +50,6 @@ export function Providers({children}) {
         if (snap.email === "" && !isAuthPage) {
             let token = localStorage.getItem("token")
             if (token === "null" || token === null) {
-                console.log("TOKEN IS NULL")
                 router.replace('/auth/login')
             }
             const getUser = async () => {
@@ -78,10 +77,9 @@ export function Providers({children}) {
 
     return (
         <NextUIProvider>
-            <Navbar isBordered>
+            <Navbar isBordered style={{borderBottom: "1px solid #ccc"}}>
                 <NavbarContent>
                     <NavbarBrand>
-
                         {
                             !isAllQuestionsPage ?
                                 <>
@@ -111,6 +109,7 @@ export function Providers({children}) {
                             <DropdownTrigger>
                                 <Avatar
                                     isBordered
+                                    style={{outline: "3px solid goldenrod", outlineOffset: "2px"}}
                                     as="button"
                                     className="transition-transform"
                                     color="warning"
@@ -128,7 +127,7 @@ export function Providers({children}) {
                                 <DropdownItem key="history" onPress={() => router.push(`/history`)}>
                                     Results History
                                 </DropdownItem>
-                                <DropdownItem key="logout" color="danger"
+                                <DropdownItem key="logout" color="danger" className="text-danger"
                                               onPress={() => handleLogout()}>
                                     Log Out
                                 </DropdownItem>

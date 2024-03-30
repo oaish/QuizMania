@@ -39,7 +39,7 @@ export default function Page() {
     }
 
     return (
-        <div style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}>
+        <div style={{position: "fixed", top: "400px", left: "50%", transform: "translate(-50%, -50%)"}}>
             <Card className="py-4 sm:w-[100%]">
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                     <h4 className="font-bold text-large lg:text-medium">Login</h4>

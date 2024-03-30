@@ -74,7 +74,7 @@ export default function Page() {
 
     const [isSubmitted, setIsSubmitted] = useState(false);
     return (
-        <div style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}>
+        <div style={{position: "fixed", top: "400px", left: "50%", transform: "translate(-50%, -50%)"}}>
             <Card className="py-4 sm:w-[100%]">
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                     <h4 className="font-bold text-large lg:text-medium">{!isSubmitted ? "Signup" : "OTP Verification"}</h4>
@@ -149,7 +149,7 @@ export default function Page() {
                                     style={{color: "goldenrod"}} href="/auth/login">Login</Link></div>
                             </>
                             : <>
-                                <OtpInput otp={otp} username={username} email={email} password={password} />
+                                <OtpInput otp={otp} username={username} email={email} password={password}/>
                             </>
                     }
                 </CardBody>

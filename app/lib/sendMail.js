@@ -1,5 +1,6 @@
 
-import nodemailer from 'nodemailer';
+// import nodemailer from 'nodemailer';
+const nodemailer = require('nodemailer');
 
 // Create a nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -7,8 +8,8 @@ const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com', // Your SMTP host
     port: 587, // Your SMTP port
     auth: {
-        user: 'oaishazher@gmail.com', // Your SMTP username
-        pass: 'ehxi lowb mmah vqpo', // Your SMTP password
+        user: 'bms.php.no.reply@gmail.com', // Your SMTP username
+        pass: 'yuwk gjcb neen zhtw', // Your SMTP password
     },
 });
 
@@ -17,7 +18,7 @@ async function sendEmail(email, otp) {
     const mailOptions = {
         from: {
             name: 'QuizMania',
-            address: 'oaishazher@gmail.com',
+            address: 'bms.php.no.reply@gmail.com',
         }, // Sender address
         to: email, // Recipient address
         subject: 'Your OTP for Authentication',
@@ -25,7 +26,6 @@ async function sendEmail(email, otp) {
         html: `<p>Your OTP is <strong>${otp}</strong></p>`,
     };
 
-    // Send email
     try {
         await transporter.sendMail(mailOptions);
         console.log('Email sent successfully');
